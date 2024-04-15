@@ -1,0 +1,87 @@
+  std::vector<char> goals;
+  bool flag = false;
+  int it = 0;
+
+  if (Inferred(goal)) {
+    output_file << "  " << ++step_ << ") ";
+    PrintDepthMarkers(depth);
+    output_file << "Goal " << goal << ". Fact";
+    output_file << "(earlier inferred), as facts ";
+    PrintInferredFacts(output_file);
+    output_file << ". Back, OK." << std::endl;
+    return 0;
+  } 
+
+  for (int i = 0; i < rules_.size(); ++i) {
+
+    if (IsAnInitialFact(goal)) {
+      initial_inferred_ = true;
+      flag = true;
+      inferred_facts_.push_back(goal);
+      output_file << "  " << ++step_ << ") ";
+      PrintDepthMarkers(depth);
+      //path_.clear();
+      output_file << "Goal " << goal << ". Fact (initial), as facts are ";
+      PrintInferredFacts(output_file);
+      output_file << ". Back, OK" << std::endl;
+      return 0;
+
+    } else if (goal == rules_[i].second && !FactsNotContains(rules_[i].second) && IsAFact(rules_[i].first)) {
+      output_file << "  " << ++step_ << ") ";
+      PrintDepthMarkers(depth);
+      output_file << "Goal " << goal << ". Cycle. Back, FAIL. " << std::endl;
+      return 1;
+
+    } else if (goal == rules_[i].second) {
+      flag = true;
+      if (goal != goal_ && FactsNotContains(goal)) {
+        facts_.push_back(goal);
+      }
+
+      output_file << "  " << ++step_ << ") ";
+      PrintDepthMarkers(depth);
+
+      output_file << "Goal " << goal << ". Find R" << i + 1 << ":";
+      PrintLHS(output_file, rules_[i].first);
+      output_file << "->" << rules_[i].second << ". New Goals ";
+      PrintLHS(output_file, rules_[i].first);
+      output_file << std::endl;
+      for (int j = 0; j < rules_[i].first.size(); ++j) {
+        goals.push_back(rules_[i].first[j]);
+      }
+      path_.push_back(i+1);
+      for (int j = 0; j < goals.size(); ++j) {
+        if (FindSolution(goals[j], depth + 1) == 1) {
+          goals.clear();
+          path_.erase(path_.end() - 1);
+        } 
+      }
+    } 
+  }
+  if (!flag) {
+    output_file << "  " << ++step_ << ") ";
+    PrintDepthMarkers(depth);
+    output_file << "Goal " << goal << ". No rules. Back, FAIL." << std::endl;
+    //path_.erase(path_.end() - 1);
+
+    //inferred_facts_.erase(inferred_facts_.end() - 1);
+    return 1;
+  } else if (inferred_facts_.empty()) {
+    output_file << "  " << ++step_ << ") ";
+    PrintDepthMarkers(depth);
+    facts_.erase(facts_.end() - 1);
+    output_file << "Goal " << goal << ". No more rules. Back, FAIL." << std::endl;
+    return 1;
+  }
+
+  if (!Inferred(goal)) {
+    output_file << "  " << ++step_ << ") ";
+    PrintDepthMarkers(depth);
+    output_file << "Goal " << goal << ". Fact";
+    inferred_facts_.push_back(goal);
+    output_file << "(presently inferred). Facts ";
+    PrintInferredFacts(output_file);
+    output_file << "." << std::endl;
+  }
+  return 0;
+       

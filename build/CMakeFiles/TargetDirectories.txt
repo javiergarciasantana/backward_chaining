@@ -1,0 +1,3 @@
+/Users/javiersantana/VU_Files/Artificial Intelligence/Backward Chaining/build/CMakeFiles/Bwd_Chaining.dir
+/Users/javiersantana/VU_Files/Artificial Intelligence/Backward Chaining/build/CMakeFiles/edit_cache.dir
+/Users/javiersantana/VU_Files/Artificial Intelligence/Backward Chaining/build/CMakeFiles/rebuild_cache.dir

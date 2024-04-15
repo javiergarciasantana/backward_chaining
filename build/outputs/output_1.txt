@@ -1,0 +1,21 @@
+PART 1. Data
+   1) Rules:
+      R1: C, D -> Z
+      R2: T -> C
+      R3: T -> Z
+   2) Facts T
+   3) Goal Z
+
+PART 2. Trace
+  1) Goal Z. Find R1:C, D->Z. New Goals C, D
+  2) -Goal C. Find R2:T->C. New Goals T
+  3) --Goal T. Fact (initial), as facts are T. Back, OK
+  4) -Goal C. Fact(presently inferred). Facts T, C. Back, OK.
+  5) -Goal D. No rules. Back, FAIL.
+  6) Goal Z. Find R3:T->Z. New Goals T
+  7) -Goal T. Fact (initial), as facts are T, C. Back, OK
+  8) Goal Z. Fact(presently inferred). Facts T, C, Z. Back, OK.
+
+PART 3: Results
+   1) Goal Z achieved.
+   2) Path R3,

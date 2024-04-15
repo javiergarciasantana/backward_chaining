@@ -1,0 +1,12 @@
+Javier Garcia Santana. Vilnius University, Software Engineering. 
+Test 1. Failed branch
+1) Rules
+Z C D
+C T
+Z T
+
+2) Facts
+T
+
+3) Goal
+Z

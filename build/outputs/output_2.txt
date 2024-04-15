@@ -1,0 +1,37 @@
+PART 1. Data
+   1) Rules:
+      R1: D, C -> Z
+      R2: C -> D
+      R3: B -> C
+      R4: D -> B
+      R5: T -> D
+      R6: H -> B
+      R7: J -> C
+   2) Facts T
+   3) Goal Z
+
+PART 2. Trace
+  1) Goal Z. Find R1:D, C->Z. New Goals D, C
+  2) -Goal D. Find R2:C->D. New Goals C
+  3) --Goal C. Find R3:B->C. New Goals B
+  4) ---Goal B. Find R4:D->B. New Goals D
+  5) ----Goal D. Cycle. Back, FAIL. 
+  6) ---Goal B. Find R6:H->B. New Goals H
+  7) ----Goal H. No rules. Back, FAIL.
+  8) ---Goal B. No more rules. Back, FAIL.
+  9) --Goal C. Find R7:J->C. New Goals J
+  10) ---Goal J. No rules. Back, FAIL.
+  11) --Goal C. No more rules. Back, FAIL.
+  12) -Goal D. Find R5:T->D. New Goals T
+  13) --Goal T. Fact (initial), as facts are T. Back, OK
+  14) -Goal D. Fact(presently inferred). Facts T, D. Back, OK.
+  15) -Goal C. Find R3:B->C. New Goals B
+  16) --Goal B. Find R4:D->B. New Goals D
+  17) ---Goal D. Fact(earlier inferred), as facts T, D. Back, OK.
+  18) --Goal B. Fact(presently inferred). Facts T, D, B. Back, OK.
+  19) -Goal C. Fact(presently inferred). Facts T, D, B, C. Back, OK.
+  20) Goal Z. Fact(presently inferred). Facts T, D, B, C, Z. Back, OK.
+
+PART 3: Results
+   1) Goal Z achieved.
+   2) Path R5, R4, R3, R1,

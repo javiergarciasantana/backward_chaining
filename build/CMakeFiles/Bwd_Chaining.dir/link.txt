@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/c++ -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/Bwd_Chaining.dir/src/bwd_chaining_main.cc.o CMakeFiles/Bwd_Chaining.dir/src/bwd_chaining.cc.o -o Bwd_Chaining 

@@ -1,0 +1,14 @@
+Javier Garcia Santana. Vilnius University, Software Engineering. 
+Test 10. Negnevitsky
+1) Rules
+Z C D
+C B
+Z T
+B A
+A T
+
+2) Facts
+T
+
+3) Goal
+Z
